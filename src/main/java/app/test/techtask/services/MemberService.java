@@ -54,7 +54,7 @@ public class MemberService {
         Optional<Member> memberOpt = memberRepository.findById(id);
         if (memberOpt.isPresent()) {
             if (borrowedBookRepository.countByMemberId(id) > 0) {
-                return false; // Cannot delete member with borrowed books
+                return false;
             }
             memberRepository.deleteById(id);
             return true;
@@ -72,18 +72,16 @@ public class MemberService {
             Book book = bookOpt.get();
 
             if (borrowedBookRepository.countByMemberId(memberId) >= borrowLimit) {
-                return false; // Exceeds borrow limit
+                return false;
             }
 
             if (book.getAmount() <= 0) {
-                return false; // No available copies
+                return false;
             }
 
-            // Update book amount
             book.setAmount(book.getAmount() - 1);
             bookRepository.save(book);
 
-            // Record the borrow
             BorrowedBook borrowedBook = new BorrowedBook();
             borrowedBook.setBook(book);
             borrowedBook.setMember(member);
@@ -102,12 +100,10 @@ public class MemberService {
         if (borrowedBookOpt.isPresent()) {
             BorrowedBook borrowedBook = borrowedBookOpt.get();
 
-            // Update book amount
             Book book = borrowedBook.getBook();
             book.setAmount(book.getAmount() + 1);
             bookRepository.save(book);
 
-            // Delete borrowed record
             borrowedBookRepository.delete(borrowedBook);
 
             return true;
