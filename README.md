@@ -53,8 +53,35 @@ This project is a library management system that allows users to add, update, an
    spring.datasource.username=your_db_username
    spring.datasource.password=your_db_password
    ```
+3. **Set Up DB**
 
-3. **Build the Application:**
+  ## Database Schema
+
+  ### Tables
+
+  1. **Books**
+     - **id** (Long) - Unique identifier for the book.
+     - **title** (String) - Title of the book.
+     - **author** (String) - Author of the book.
+     - **amount** (Integer) - Number of copies available.
+
+  2. **Members**
+     - **id** (Long) - Unique identifier for the member.
+     - **member_name** (String) - Name of the member.
+     - **membership_date** (LocalDate) - Date the member joined the library.
+  
+  3. **BorrowedBooks**
+     - **id** (Long) - Unique identifier for the record.
+     - **member_id** (Long) - Foreign key referencing the `Members` table.
+     - **book_id** (Long) - Foreign key referencing the `Books` table.
+     - **borrowed_date** (LocalDate) - Date the book was borrowed.
+
+  ### Relationships
+  
+  - **Books** and **Members** have a many-to-many relationship through the **BorrowedBooks** table. A book can be borrowed by multiple members, and a member can borrow multiple books.
+  - The **BorrowedBooks** table keeps track of which books are borrowed by which members and the date of borrowing.
+
+4. **Build the Application:**
 
    Navigate to the project directory and run:
 
@@ -62,7 +89,7 @@ This project is a library management system that allows users to add, update, an
    mvn clean install
    ```
 
-4. **Run the Application:**
+5. **Run the Application:**
 
    After building, you can run the application using:
 
