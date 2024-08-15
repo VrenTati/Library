@@ -18,7 +18,6 @@ public class BookService {
         this.borrowedBookRepository = borrowedBookRepository;
     }
 
-    // Create or update a book
     @Transactional
     public Book saveBook(Book book) {
         Book existingBook = bookRepository.findByTitleAndAuthor(book.getTitle(), book.getAuthor());
@@ -29,7 +28,6 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    // Read a book by ID
     public Book getBookById(Long id) {
         return bookRepository.findById(id).orElse(null);
     }
