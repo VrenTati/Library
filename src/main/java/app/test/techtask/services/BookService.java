@@ -48,7 +48,6 @@ public class BookService {
         Book book = bookRepository.findById(id).orElse(null);
         if (book != null) {
             if (borrowedBookRepository.countByBookId(id) > 0) {
-                // Book is borrowed, cannot delete
                 return false;
             }
             bookRepository.deleteById(id);
