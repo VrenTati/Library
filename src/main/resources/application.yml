@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: techTask
+    datasource:
+        password: 2281
+        username: postgres
+        url: jdbc:postgresql://localhost:5432/library
+    jpa:
+        generate-ddl: true
+
