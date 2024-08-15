@@ -34,7 +34,7 @@ class BookControllerTest {
 
     private Book book;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {

@@ -53,7 +53,6 @@ public class MemberService {
     public boolean deleteMember(Long id) {
         Optional<Member> memberOpt = memberRepository.findById(id);
         if (memberOpt.isPresent()) {
-            Member member = memberOpt.get();
             if (borrowedBookRepository.countByMemberId(id) > 0) {
                 return false; // Cannot delete member with borrowed books
             }

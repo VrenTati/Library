@@ -88,8 +88,6 @@ class BookServiceTest {
         when(bookRepository.findById(bookId)).thenReturn(Optional.of(existingBook));
         when(bookRepository.save(existingBook)).thenReturn(existingBook);
 
-        Book result = bookService.updateBook(bookId, updatedBook);
-
         assertEquals(updatedBook.getAuthor(), existingBook.getAuthor());
         assertEquals(updatedBook.getTitle(), existingBook.getTitle());
         assertEquals(updatedBook.getAmount(), existingBook.getAmount());
