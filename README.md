@@ -25,62 +25,91 @@ This project is a library management system that allows users to add, update, an
 - PostgreSQL
 - Swagger for API documentation
 
-## Installation
+## Setup Instructions
 
-1. **Clone the repository:**
+### Prerequisites
+
+1. **Java Development Kit (JDK) 21:** Ensure you have JDK 21 installed.
+2. **Maven:** Maven is used for managing dependencies and building the application.
+3. **PostgreSQL:** The application uses PostgreSQL as the database.
+4. **Git:** Git is required to clone the repository.
+5. **IDE:** An IDE like IntelliJ IDEA, Eclipse, or VS Code is recommended.
+
+### Setup Instructions
+
+1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/vrentati/library.git
    cd library
    ```
 
-2. **Set up the database:**
+2. **Set Up Environment Variables:**
 
-   Ensure that PostgreSQL is installed and configured on your machine.
+   Create a `.env` file or update `application.properties` to include the necessary environment variables:
 
-   Create the database:
-
-   ```sql
-   CREATE DATABASE library;
+   ```properties
+   spring.datasource.url=jdbc:postgresql://localhost:5432/library
+   spring.datasource.username=your_db_username
+   spring.datasource.password=your_db_password
    ```
 
-   Configure the database connection parameters in the `application.properties` or `application.yml` file.
+3. **Build the Application:**
 
-3. **Run the application:**
-
-   Use Maven to compile and run the application:
+   Navigate to the project directory and run:
 
    ```bash
-   ./mvnw spring-boot:run
+   mvn clean install
    ```
 
-   or:
+4. **Run the Application:**
+
+   After building, you can run the application using:
 
    ```bash
    mvn spring-boot:run
    ```
 
-4. **Access Swagger UI:**
+   The application will start on `http://localhost:8080`.
 
-   After starting the application, visit `http://localhost:8080/swagger-ui.html` to view the API documentation.
+6. **Access Swagger Documentation:**
 
-## Usage
+   The API documentation is available via Swagger at `http://localhost:8080/swagger-ui.html`.
 
-### API Endpoints
+7. **Running Tests:**
 
-- **Books**
-  - `POST /books` - Add a new book.
-  - `GET /books/{id}` - View information about a book by ID.
-  - `PUT /books/{id}` - Update a book.
-  - `DELETE /books/{id}` - Delete a book.
+   To run the unit tests, use:
 
-- **Members**
-  - `POST /members` - Add a new member.
-  - `GET /members/{id}` - View information about a member by ID.
-  - `PUT /members/{id}` - Update a member.
-  - `DELETE /members/{id}` - Delete a member.
-  - `POST /members/{memberId}/borrow/{bookId}` - Borrow a book.
-  - `POST /members/{memberId}/return/{bookId}` - Return a book.
+   ```bash
+   mvn test
+   ```
+
+## API Endpoints Overview
+
+### Books Management:
+
+- `POST /books` - Create or update a book.
+- `GET /books/{id}` - Get book by ID.
+- `PUT /books/{id}` - Update a book.
+- `DELETE /books/{id}` - Delete a book.
+
+### Members Management:
+
+- `POST /members` - Create a member.
+- `GET /members/{id}` - Get member by ID.
+- `PUT /members/{id}` - Update a member.
+- `DELETE /members/{id}` - Delete a member.
+
+### Borrowing and Returning Books:
+
+- `POST /members/{memberId}/borrow/{bookId}` - Borrow a book.
+- `POST /members/{memberId}/return/{bookId}` - Return a book.
+
+### Additional Endpoints:
+
+- `GET /members/books/borrowed?memberName={name}` - Get books borrowed by member name.
+- `GET /members/books/borrowed/distinct` - Get distinct borrowed book names.
+- `GET /members/books/borrowed/count` - Get borrowed book names with count.
 
 ## Testing
 
